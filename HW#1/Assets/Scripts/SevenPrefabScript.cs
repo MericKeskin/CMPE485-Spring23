@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SevenScript : MonoBehaviour
+public class SevenPrefabScript : MonoBehaviour
 {
-    public Rigidbody rb;
+    public GameObject objToSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,8 @@ public class SevenScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(0, -500*Time.deltaTime, 2000*Time.deltaTime);
+        if (Input.GetKey("c")) {
+            Instantiate(objToSpawn);
+        }
     }
 }
