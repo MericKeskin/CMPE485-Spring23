@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SevenScript : MonoBehaviour
 {
+    public Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class SevenScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        rb.AddForce(0, -500*Time.deltaTime, 2000*Time.deltaTime);
     }
 }
