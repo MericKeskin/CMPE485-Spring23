@@ -9,16 +9,17 @@ public class GameManager : MonoBehaviour
     private GameObject startPlatform;
     [SerializeField]
     private GameObject dancingLine;
+    private Camera mainCamera;
     [HideInInspector]
     public string gameState;
     private AudioManager audioManager;
-    private bool audioOn;
 
     IEnumerator LowerStartPlatform()
     {
         while (startPlatform.transform.position.y > -1.5) {
             startPlatform.transform.position -= new Vector3(0, 0.05f, 0);
             dancingLine.transform.position -= new Vector3(0, 0.05f, 0);
+            mainCamera.transform.position += new Vector3(0, 0.05f, 0);
             yield return new WaitForSeconds(0.01f);
         }
         gameState = "ready";
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = "prep";
+        mainCamera = FindObjectOfType<Camera>();
+        audioManager = FindObjectOfType<AudioManager>();
         StartCoroutine(LowerStartPlatform());
     }
 
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (gameState == "ready" && Input.GetKeyDown(KeyCode.Space)) {
+            audioManager.source.Play();
             gameState = "start";
         }
     }
