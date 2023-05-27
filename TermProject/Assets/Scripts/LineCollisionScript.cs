@@ -6,6 +6,7 @@ public class LineCollisionScript : MonoBehaviour
 {
 
     private GameManager gameManager;
+    private LineScript lineScript;
 
     IEnumerator WallDown(GameObject wall, float toPos, float speed)
     {
@@ -45,7 +46,18 @@ public class LineCollisionScript : MonoBehaviour
     {
 
         if (collision.gameObject.tag == "Obstacle") {
-            Debug.Log("finish");
+            gameManager.EndGame();
+        } else if (collision.gameObject.tag == "Path") {
+            lineScript.lineState = "ground";
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Path") {
+            lineScript.lineState = "air";
         }
 
     }
@@ -54,6 +66,7 @@ public class LineCollisionScript : MonoBehaviour
     {
 
         gameManager = FindObjectOfType<GameManager>();
+        lineScript = gameObject.GetComponent<LineScript>();
 
     }
 

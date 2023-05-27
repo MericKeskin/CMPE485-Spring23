@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Trigger
+  - Path
   layers:
   - Default
   - TransparentFX

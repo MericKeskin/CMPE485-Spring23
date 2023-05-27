@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7066440506247641821}
   - component: {fileID: 7066440506247641826}
   - component: {fileID: 7066440506247641827}
+  - component: {fileID: 8208336305418692490}
   - component: {fileID: 7066440506247641824}
   - component: {fileID: 7066440506247641825}
   m_Layer: 0
@@ -99,6 +100,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8208336305418692490
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7066440506247641830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7066440506247641824
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,4 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 0.01
   lineSpeed: 0.1
+  lineState: 
   trailPrefab: {fileID: 3066318195058506198, guid: b759f5ce8da2e1a4986dca29d9d22498, type: 3}

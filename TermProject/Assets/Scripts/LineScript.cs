@@ -14,6 +14,8 @@ public class LineScript : MonoBehaviour
     private float temp;
     private Vector3 movement;
     private Vector3 trailPosition;
+    [HideInInspector]
+    public string lineState;
     private bool tap = false;
     private bool firstTrail = false;
     [SerializeField] private GameObject trailPrefab;
@@ -27,8 +29,10 @@ public class LineScript : MonoBehaviour
 
     void TrailLine()
     {
-        trailPosition = transform.position;
-        GameObject trail = Instantiate(trailPrefab, trailPosition, transform.rotation);
+        if (lineState == "ground") {
+            trailPosition = transform.position;
+            GameObject trail = Instantiate(trailPrefab, trailPosition, transform.rotation);
+        }
     }
 
     // Start is called before the first frame update
@@ -39,13 +43,14 @@ public class LineScript : MonoBehaviour
         // rb = gameObject.GetComponent<Rigidbody>();
         x_speed = 0;
         z_speed = lineSpeed;
+        // lineState = "ground";
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.gameState == "start" && Input.GetKeyDown(KeyCode.Space)) {
+        if (gameManager.gameState == "start" && lineState == "ground" && Input.GetKeyDown(KeyCode.Space)) {
             tap = true;
         }
     }
