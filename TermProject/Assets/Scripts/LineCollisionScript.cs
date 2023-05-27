@@ -38,6 +38,8 @@ public class LineCollisionScript : MonoBehaviour
             } else {
                 StartCoroutine(WallUp(wall, toPos, speed));
             }
+        } else if (other.tag == "Finish") {
+            gameManager.WinGame();
         }
 
     }

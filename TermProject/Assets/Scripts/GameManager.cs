@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject canvas;
     [SerializeField]
+    private GameObject pressSpace;
+    [SerializeField]
     private GameObject endMenu;
+    [SerializeField]
+    private GameObject winMenu;
     [SerializeField]
     private GameObject pauseMenu;
     private bool isPaused = false;
@@ -30,7 +34,21 @@ public class GameManager : MonoBehaviour
             mainCamera.transform.position += new Vector3(0, 0.05f, 0);
             yield return new WaitForSeconds(0.01f);
         }
+        canvas.SetActive(true);
+        pressSpace.SetActive(true);
         gameState = "ready";
+    }
+
+    IEnumerator FadeMusicOut(float duration)
+    {
+        float currentTime = 0;
+        float startVolume = audioManager.source.volume;
+        while (currentTime < duration) {
+            currentTime += Time.deltaTime;
+            audioManager.source.volume = Mathf.Lerp(startVolume, 0, currentTime/duration);
+            yield return null;
+        }
+
     }
 
     // Start is called before the first frame update
@@ -48,6 +66,8 @@ public class GameManager : MonoBehaviour
         
         if (gameState == "ready" && Input.GetKeyDown(KeyCode.Space)) {
             audioManager.source.Play();
+            canvas.SetActive(false);
+            pressSpace.SetActive(false);
             gameState = "start";
         }
 
@@ -81,9 +101,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void WinGame()
+    {
+        StartCoroutine(FadeMusicOut(2));
+        canvas.SetActive(true);
+        winMenu.SetActive(true);
+    }
+
     public void BackToMenu()
     {
         Time.timeScale = 1f;
+        endMenu.SetActive(false);
+        winMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        canvas.SetActive(false);
         SceneManager.LoadScene("Menu");
     }
 
