@@ -6,6 +6,8 @@ public class TriggerScript : MonoBehaviour
 {
 
     public GameObject relatedObject;
+    public float toPos;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
